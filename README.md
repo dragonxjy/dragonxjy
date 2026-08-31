@@ -23,6 +23,25 @@
     </samp>
   </p>
 
+  <p>
+    <a href="https://github.com/dragonxjy">
+      <img
+        src="https://img.shields.io/badge/GitHub-@dragonxjy-181717?style=for-the-badge&logo=github&logoColor=white"
+        alt="GitHub @dragonxjy"
+      />
+    </a>
+    <a href="https://github.com/dragonxjy?tab=followers">
+      <img
+        src="https://img.shields.io/github/followers/dragonxjy?style=for-the-badge&logo=github&label=Followers&color=238A70"
+        alt="GitHub followers"
+      />
+    </a>
+    <img
+      src="https://img.shields.io/badge/Working_since-2024--07--01-C97800?style=for-the-badge&logo=googlecalendar&logoColor=white"
+      alt="Working since 2024-07-01"
+    />
+  </p>
+
   <img
     src="./assets/dragonxjy-coding.gif"
     width="560"
@@ -34,9 +53,7 @@
   </p>
 
   <p>
-    <a href="https://github.com/dragonxjy">GitHub</a>
-    &nbsp;·&nbsp;
-    <a href="https://github.com/dragonxjy?tab=repositories">Projects</a>
+    <a href="https://github.com/dragonxjy?tab=repositories">Browse my projects</a>
   </p>
 
   <sub>Curious by default. Building on purpose.</sub>
