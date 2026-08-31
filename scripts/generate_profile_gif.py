@@ -78,6 +78,18 @@ def draw_background(draw: ImageDraw.ImageDraw, frame: int) -> None:
     draw.line((52, 105, 38, 139), fill="#D1E2E5")
     draw.line((190, 105, 207, 139), fill="#D1E2E5")
 
+    # A quiet wall clock and drifting dust make the room feel lived in.
+    draw.ellipse((91, 15, 108, 32), fill="#D5E3E7", outline=COLORS["navy_light"], width=2)
+    draw.ellipse((94, 18, 105, 29), fill=COLORS["white"])
+    clock_tick = (frame // 4) % 8
+    hand_x = 100 + int(round(math.sin(clock_tick * math.pi / 4) * 4))
+    hand_y = 24 - int(round(math.cos(clock_tick * math.pi / 4) * 4))
+    draw.line((100, 24, hand_x, hand_y), fill=COLORS["navy"], width=1)
+    draw.line((100, 24, 97, 27), fill=COLORS["coral"], width=1)
+    for index, (x, y) in enumerate(((72, 76), (85, 85), (101, 91), (117, 98))):
+        drift = (frame // 3 + index * 2) % 7
+        draw.point((x + drift, y - drift // 2), fill="#E8DFAF")
+
     # Window with moving clouds and a small city skyline.
     draw.rectangle((16, 15, 79, 67), fill=COLORS["navy_light"])
     draw.rectangle((19, 18, 76, 64), fill="#D9EEFA")
@@ -140,6 +152,14 @@ def draw_background(draw: ImageDraw.ImageDraw, frame: int) -> None:
     draw.point((84, 93), fill="#7F522D")
     draw.point((188, 92), fill="#7F522D")
 
+    # Notebook, pen, and mouse sit in the monitor's negative space.
+    draw.polygon([(188, 81), (207, 80), (211, 88), (190, 89)], fill="#F6F0DD", outline=COLORS["navy_light"])
+    draw.line((194, 83, 205, 82), fill="#B5B0A2")
+    draw.line((195, 86, 207, 85), fill="#B5B0A2")
+    draw.line((187, 79, 206, 88), fill=COLORS["coral"], width=2)
+    draw.ellipse((214, 81, 221, 91), fill="#DCE7EA", outline=COLORS["navy_light"])
+    draw.line((217, 83, 217, 86), fill=COLORS["navy_light"])
+
 
 def draw_monitor(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
     shake = 0
@@ -164,6 +184,8 @@ def draw_monitor(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
     draw.rectangle((x + 28, y + 48, x + 34, y + 55), fill=COLORS["navy"])
     draw.rectangle((x + 18, y + 55, x + 44, y + 58), fill=COLORS["navy"])
     draw.rectangle((x + 7, y + 42, x + 9, y + 44), fill=COLORS["mint"])
+    draw.arc((x + 51, y + 17, x + 72, y + 48), 265, 95, fill=COLORS["navy_light"], width=2)
+    draw.rectangle((x + 65, y + 41, x + 70, y + 50), outline=COLORS["navy_light"])
 
     font_small = load_font(7)
     font_medium = load_font(9, bold=True)
@@ -211,6 +233,7 @@ def draw_keyboard(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
             [(111, 89), (121 + spread, 87), (128 + spread, 92), (104, 94)],
             fill=COLORS["coffee"],
         )
+        draw.line((114, 90, 119 + spread, 89), fill="#A86B4B")
         draw.point((126 + spread // 2, 96), fill=COLORS["coffee"])
 
     if stage == "error" and frame < 37:
@@ -283,6 +306,16 @@ def draw_character(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
     )
     draw.rectangle((head_x + 5, head_y - 3, head_x + 13, head_y - 1), fill=COLORS["navy_light"])
     draw.point((head_x + 15, head_y + 13), fill=COLORS["skin_shadow"])
+
+    screen_light = {
+        "typing": COLORS["blue_light"],
+        "success": COLORS["hoodie_light"],
+        "spill": COLORS["hoodie_light"],
+        "error": "#FF9A83",
+        "recovery": "#9CB9C9",
+    }[stage]
+    draw.line((head_x + 16, head_y + 8, head_x + 16, head_y + 14), fill=screen_light)
+    draw.line((97, 75, 98, 84), fill=screen_light, width=2)
 
     if stage == "error":
         draw.rectangle((head_x + 7, head_y + 10, head_x + 9, head_y + 12), fill=COLORS["white"])
@@ -360,25 +393,126 @@ def render_frame(frame: int) -> Image.Image:
 
 
 def generate_title(output_dir: Path) -> None:
-    width, height = 1000, 150
+    width, height = 1100, 180
     image = Image.new("RGBA", (width, height), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     try:
-        font = ImageFont.truetype(r"C:\Windows\Fonts\Inkfree.ttf", 76)
+        font = ImageFont.truetype(r"C:\Windows\Fonts\Inkfree.ttf", 82)
     except OSError:
-        font = ImageFont.truetype("DejaVuSans.ttf", 76)
+        font = ImageFont.truetype("DejaVuSans.ttf", 82)
     text = "Hey, I'm Dragon_xjy."
     bbox = draw.textbbox((0, 0), text, font=font)
     text_width = bbox[2] - bbox[0]
     x = (width - text_width) // 2
-    draw.text((x, 18), text, font=font, fill=COLORS["navy"])
-    underline_y = 116
-    draw.line(
-        [(x + 50, underline_y), (x + text_width // 2, underline_y + 5), (x + text_width - 38, underline_y - 1)],
-        fill=COLORS["coral"],
-        width=5,
-    )
+    text_y = 24
+    draw.text((x + 3, text_y + 4), text, font=font, fill=(24, 52, 79, 48))
+    draw.text((x, text_y), text, font=font, fill=COLORS["navy"])
+
+    underline_y = 132
+    points = []
+    for step in range(33):
+        ratio = step / 32
+        px = int(x + 48 + (text_width - 88) * ratio)
+        py = int(underline_y + math.sin(ratio * math.pi) * 7 - math.sin(ratio * math.tau) * 2)
+        points.append((px, py))
+    draw.line(points, fill=COLORS["coral"], width=5)
+    draw.line(points[4:-5], fill="#FF9A77", width=2)
+
+    for sx, sy, color, size in (
+        (x - 28, 72, COLORS["yellow"], 8),
+        (x + text_width + 28, 52, COLORS["mint"], 7),
+        (x + text_width + 8, 119, COLORS["coral"], 4),
+    ):
+        draw.line((sx - size, sy, sx + size, sy), fill=color, width=3)
+        draw.line((sx, sy - size, sx, sy + size), fill=color, width=3)
+        draw.ellipse((sx - 2, sy - 2, sx + 2, sy + 2), fill=COLORS["white"])
     image.save(output_dir / "dragonxjy-title.png", optimize=True)
+
+
+def generate_cat_icon(output_dir: Path) -> None:
+    palette_colors = (
+        (0, 0, 0),
+        (24, 52, 79),
+        (245, 184, 77),
+        (217, 134, 53),
+        (255, 241, 205),
+        (240, 139, 131),
+        (89, 205, 177),
+        (255, 255, 255),
+        (245, 170, 145),
+        (244, 119, 91),
+    )
+    palette = [channel for color in palette_colors for channel in color]
+    palette.extend([0] * (768 - len(palette)))
+    frames = []
+
+    for frame in range(12):
+        image = Image.new("P", (32, 32), 0)
+        image.putpalette(palette)
+        draw = ImageDraw.Draw(image)
+        bob = -1 if frame in (2, 3, 8, 9) else 0
+        tail_shift = int(round(math.sin(frame * math.tau / 12) * 2))
+
+        draw.arc((2, 14 + tail_shift, 14, 29), 75, 275, fill=1, width=4)
+        draw.arc((3, 14 + tail_shift, 13, 28), 75, 275, fill=3, width=2)
+        draw.ellipse((8, 14 + bob, 24, 30 + bob), fill=1)
+        draw.ellipse((10, 15 + bob, 22, 29 + bob), fill=2)
+        draw.rectangle((11, 26 + bob, 14, 30 + bob), fill=3)
+        draw.rectangle((19, 26 + bob, 22, 30 + bob), fill=3)
+
+        draw.polygon([(7, 8 + bob), (9, 2 + bob), (14, 7 + bob)], fill=1)
+        draw.polygon([(18, 7 + bob), (23, 2 + bob), (25, 10 + bob)], fill=1)
+        draw.polygon([(9, 7 + bob), (10, 4 + bob), (13, 8 + bob)], fill=5)
+        draw.polygon([(20, 8 + bob), (22, 4 + bob), (23, 9 + bob)], fill=5)
+        draw.ellipse((6, 6 + bob, 25, 22 + bob), fill=1)
+        draw.ellipse((8, 7 + bob, 23, 21 + bob), fill=2)
+        draw.ellipse((11, 13 + bob, 21, 20 + bob), fill=4)
+
+        if frame in (4, 5, 10):
+            draw.line((11, 12 + bob, 14, 12 + bob), fill=1)
+            draw.line((18, 12 + bob, 21, 12 + bob), fill=1)
+        else:
+            draw.rectangle((12, 11 + bob, 13, 13 + bob), fill=1)
+            draw.rectangle((19, 11 + bob, 20, 13 + bob), fill=1)
+            draw.point((12, 11 + bob), fill=7)
+            draw.point((19, 11 + bob), fill=7)
+
+        draw.polygon([(15, 15 + bob), (17, 15 + bob), (16, 17 + bob)], fill=5)
+        draw.line((16, 17 + bob, 16, 18 + bob), fill=1)
+        draw.line((16, 18 + bob, 14, 19 + bob), fill=1)
+        draw.line((16, 18 + bob, 18, 19 + bob), fill=1)
+        draw.point((10, 17 + bob), fill=8)
+        draw.point((22, 17 + bob), fill=8)
+        draw.line((10, 16 + bob, 4, 15 + bob), fill=1)
+        draw.line((10, 18 + bob, 4, 19 + bob), fill=1)
+        draw.line((22, 16 + bob, 28, 15 + bob), fill=1)
+        draw.line((22, 18 + bob, 28, 19 + bob), fill=1)
+
+        paw_y = 8 + (frame % 4 in (1, 2)) * 2
+        draw.line((22, 20 + bob, 27, paw_y), fill=1, width=5)
+        draw.line((22, 20 + bob, 27, paw_y), fill=2, width=3)
+        draw.ellipse((25, paw_y - 2, 29, paw_y + 2), fill=2, outline=1)
+        draw.rectangle((9, 19 + bob, 23, 21 + bob), fill=6)
+
+        if frame in (7, 8, 9):
+            draw.point((29, 3), fill=9)
+            draw.point((28, 2), fill=9)
+            draw.point((30, 2), fill=9)
+            draw.point((29, 4), fill=9)
+
+        frames.append(image.resize((96, 96), Image.Resampling.NEAREST))
+
+    cat_path = output_dir / "waving-cat.gif"
+    frames[0].save(
+        cat_path,
+        save_all=True,
+        append_images=frames[1:],
+        duration=110,
+        loop=0,
+        optimize=True,
+        transparency=0,
+        disposal=2,
+    )
 
 
 def main() -> None:
@@ -403,6 +537,7 @@ def main() -> None:
         disposal=1,
     )
     generate_title(output_dir)
+    generate_cat_icon(output_dir)
     print(f"Generated {gif_path} with {len(frames)} frames")
 
 

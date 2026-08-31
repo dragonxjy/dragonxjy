@@ -11,6 +11,7 @@
   <p>
     <samp>
       👋 Hello! I'm a curious maker who enjoys giving ideas a real shape.
+      <img src="./assets/waving-cat.gif" width="24" alt="A cute waving pixel cat" />
     </samp>
   </p>
 
@@ -43,19 +44,17 @@
 
   <img
     src="./assets/dragonxjy-coding.gif"
-    width="500"
+    width="460"
     alt="A funny pixel animation about coding, celebrating, spilling coffee, and meeting a 500 error"
   />
 
   <p>
-    <samp>Words live on Juejin. Work lives on GitHub.</samp>
+    <samp>☕ Welcome in — the ideas are fresh, and the keyboard has survived the coffee. Mostly.</samp>
   </p>
 
   <h3>
     <samp>
-      ✍️ <a href="https://juejin.cn/user/1368213338982584/posts">Read my blog</a>
-      &nbsp;&nbsp;·&nbsp;&nbsp;
-      🧩 <a href="https://github.com/dragonxjy?tab=repositories">Explore my projects</a>
+      ✍️ <a href="https://juejin.cn/user/1368213338982584/posts">Blog</a>
     </samp>
   </h3>
 
