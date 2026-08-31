@@ -7,13 +7,11 @@
     width="620"
     alt="Hey, I'm Dragon_xjy."
   />
-
-  <p>
-    <samp>
-      👋 Hello! I'm a curious maker who enjoys giving ideas a real shape.
-      <img src="./assets/waving-cat.gif" width="24" alt="A cute waving pixel cat" />
-    </samp>
-  </p>
+  <br />
+  <samp>
+    👋 Hello! I'm a curious maker who enjoys giving ideas a real shape.
+    <img src="./assets/waving-cat.gif" width="24" alt="A cute waving pixel cat" />
+  </samp>
 
   <p>
     <samp>
@@ -47,17 +45,7 @@
     width="460"
     alt="A funny pixel animation about coding, celebrating, spilling coffee, and meeting a 500 error"
   />
-
-  <p>
-    <samp>☕ Welcome in — the ideas are fresh, and the keyboard has survived the coffee. Mostly.</samp>
-  </p>
-
-  <h3>
-    <samp>
-      ✍️ <a href="https://juejin.cn/user/1368213338982584/posts">Blog</a>
-    </samp>
-  </h3>
-
-  <sub>Curious by default. Building on purpose.</sub>
+  <br />
+  <samp>💬 Wanna chat? 👉 Feel free to leave a message on my <a href="https://juejin.cn/user/1368213338982584/posts">Blog</a></samp>
 
 </div>

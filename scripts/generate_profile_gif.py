@@ -393,7 +393,7 @@ def render_frame(frame: int) -> Image.Image:
 
 
 def generate_title(output_dir: Path) -> None:
-    width, height = 1100, 180
+    width, height = 1100, 150
     image = Image.new("RGBA", (width, height), (255, 255, 255, 0))
     draw = ImageDraw.Draw(image)
     try:
