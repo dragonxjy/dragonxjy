@@ -14,6 +14,7 @@ FRAME_DURATION_MS = 100
 
 COLORS = {
     "wall": "#F5F8FA",
+    "wall_warm": "#FBF7E9",
     "floor": "#DCE9EC",
     "floor_line": "#B6D1D7",
     "navy": "#18344F",
@@ -28,6 +29,10 @@ COLORS = {
     "red": "#D94F55",
     "skin": "#F1B58E",
     "skin_shadow": "#D88E69",
+    "skin_light": "#FFD0A8",
+    "hoodie_light": "#79DDC4",
+    "denim": "#315773",
+    "denim_light": "#466E89",
     "wood": "#D6A45A",
     "wood_light": "#EDC778",
     "wood_dark": "#9C6534",
@@ -66,8 +71,12 @@ def draw_spark(draw: ImageDraw.ImageDraw, x: int, y: int, color: str, size: int 
 
 def draw_background(draw: ImageDraw.ImageDraw, frame: int) -> None:
     draw.rectangle((0, 0, BASE_WIDTH - 1, 104), fill=COLORS["wall"])
+    draw.polygon([(19, 61), (76, 61), (145, 104), (92, 104)], fill=COLORS["wall_warm"])
     draw.rectangle((0, 105, BASE_WIDTH - 1, BASE_HEIGHT - 1), fill=COLORS["floor"])
     draw.line((0, 104, BASE_WIDTH - 1, 104), fill=COLORS["floor_line"], width=2)
+    draw.line((18, 122, 222, 122), fill="#D1E2E5")
+    draw.line((52, 105, 38, 139), fill="#D1E2E5")
+    draw.line((190, 105, 207, 139), fill="#D1E2E5")
 
     # Window with moving clouds and a small city skyline.
     draw.rectangle((16, 15, 79, 67), fill=COLORS["navy_light"])
@@ -79,8 +88,12 @@ def draw_background(draw: ImageDraw.ImageDraw, frame: int) -> None:
     draw.rectangle((36, 44, 47, 64), fill="#779FB2")
     draw.rectangle((49, 53, 57, 64), fill="#91B4C2")
     draw.rectangle((59, 39, 72, 64), fill="#6E97AB")
+    for x, y in ((27, 54), (31, 58), (39, 50), (43, 55), (63, 45), (68, 50)):
+        draw.rectangle((x, y, x + 1, y + 2), fill="#D9EEF5")
     draw.line((47, 18, 47, 64), fill=COLORS["navy_light"], width=2)
     draw.line((19, 42, 76, 42), fill=COLORS["navy_light"], width=2)
+    draw.line((22, 20, 43, 40), fill="#EDF8FD")
+    draw.line((50, 20, 72, 40), fill="#EDF8FD")
 
     # Shelf, books, and small plant add depth without crowding the scene.
     draw.rectangle((184, 22, 224, 25), fill=COLORS["wood_dark"])
@@ -88,17 +101,22 @@ def draw_background(draw: ImageDraw.ImageDraw, frame: int) -> None:
     draw.rectangle((194, 9, 199, 22), fill=COLORS["yellow"])
     draw.rectangle((200, 14, 205, 22), fill=COLORS["blue"])
     draw.rectangle((214, 16, 221, 22), fill=COLORS["wood"])
+    draw.rectangle((215, 17, 219, 21), fill=COLORS["wood_light"])
     draw.line((217, 16, 211, 10), fill=COLORS["mint_dark"], width=2)
     draw.line((218, 16, 224, 10), fill=COLORS["mint_dark"], width=2)
     draw.line((217, 16, 218, 7), fill=COLORS["mint"], width=2)
+    draw.point((211, 9), fill=COLORS["hoodie_light"])
+    draw.point((224, 9), fill=COLORS["hoodie_light"])
 
     font_small = load_font(7, bold=True)
+    draw.rectangle((192, 45, 226, 66), fill="#D9E4E6")
     draw.rectangle((190, 43, 224, 64), fill="#FFF0B8", outline=COLORS["wood_dark"])
     draw.text((194, 47), "NO BUGS", fill=COLORS["navy"], font=font_small)
     draw.text((198, 55), "TODAY", fill=COLORS["coral"], font=font_small)
 
     # Rug and furniture shadows.
-    draw.ellipse((36, 120, 222, 134), fill="#C4DDE1")
+    draw.ellipse((34, 119, 224, 135), fill="#BBD6DB")
+    draw.ellipse((43, 121, 215, 133), fill="#C9E0E4")
     draw.rectangle((48, 93, 55, 126), fill=COLORS["wood_dark"])
     draw.rectangle((211, 93, 218, 126), fill=COLORS["wood_dark"])
     draw.rectangle((179, 96, 207, 119), fill="#C28A48")
@@ -117,6 +135,10 @@ def draw_background(draw: ImageDraw.ImageDraw, frame: int) -> None:
     draw.rectangle((43, 88, 221, 94), fill=COLORS["wood"])
     draw.rectangle((43, 88, 221, 90), fill=COLORS["wood_light"])
     draw.rectangle((43, 94, 221, 97), fill=COLORS["wood_dark"])
+    for x1, x2, y in ((49, 79, 92), (92, 132, 91), (151, 186, 93), (194, 216, 91)):
+        draw.line((x1, y, x2, y), fill="#BA8041")
+    draw.point((84, 93), fill="#7F522D")
+    draw.point((188, 92), fill="#7F522D")
 
 
 def draw_monitor(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
@@ -135,7 +157,10 @@ def draw_monitor(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
     draw.rectangle((x - 7, y - 7, x + 68, y + 58), fill=glow)
     draw.rectangle((x - 3, y - 3, x + 64, y + 54), fill="#D8E3E8")
     draw.rectangle((x, y, x + 61, y + 47), fill=COLORS["navy"])
+    draw.line((x + 2, y + 2, x + 59, y + 2), fill=COLORS["navy_light"])
+    draw.line((x + 2, y + 2, x + 2, y + 45), fill=COLORS["navy_light"])
     draw.rectangle((x + 5, y + 5, x + 56, y + 39), fill=COLORS["screen"])
+    draw.polygon([(x + 6, y + 6), (x + 24, y + 6), (x + 6, y + 24)], fill="#13334B")
     draw.rectangle((x + 28, y + 48, x + 34, y + 55), fill=COLORS["navy"])
     draw.rectangle((x + 18, y + 55, x + 44, y + 58), fill=COLORS["navy"])
     draw.rectangle((x + 7, y + 42, x + 9, y + 44), fill=COLORS["mint"])
@@ -172,6 +197,7 @@ def draw_monitor(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
 
 def draw_keyboard(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
     draw.polygon([(121, 82), (169, 82), (177, 91), (114, 91)], fill=COLORS["navy_dark"])
+    draw.line((122, 82, 168, 82), fill=COLORS["navy_light"])
     draw.line((119, 88, 172, 88), fill=COLORS["navy_light"], width=1)
     for row_y in (85, 88):
         offset = 0 if row_y == 85 else 2
@@ -195,6 +221,7 @@ def draw_keyboard(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
 def draw_mug(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
     if stage in ("typing", "success"):
         draw.rectangle((104, 76, 114, 88), fill=COLORS["white"], outline=COLORS["navy"], width=1)
+        draw.rectangle((105, 77, 107, 86), fill="#DDE9EC")
         draw.rectangle((114, 79, 119, 85), outline=COLORS["navy"], width=2)
         draw.rectangle((106, 76, 112, 78), fill=COLORS["coffee"])
         steam = frame % 6
@@ -224,14 +251,22 @@ def draw_character(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
     head_x, head_y = 78 + jitter, 47
 
     # Legs and shoes.
-    draw.polygon([(75, 91), (84, 91), (79, 113), (72, 113)], fill="#315773")
+    draw.polygon([(75, 91), (84, 91), (79, 113), (72, 113)], fill=COLORS["denim"])
     draw.polygon([(87, 91), (97, 91), (104, 112), (96, 114)], fill=COLORS["navy"])
+    draw.line((78, 93, 75, 109), fill=COLORS["denim_light"], width=2)
+    draw.line((92, 93, 101, 109), fill=COLORS["navy_light"], width=2)
     draw.rectangle((68, 112, 80, 116), fill=COLORS["navy_dark"])
     draw.rectangle((97, 111, 111, 115), fill=COLORS["navy_dark"])
+    draw.line((69, 116, 80, 116), fill="#8EA9B8")
+    draw.line((98, 115, 111, 115), fill="#8EA9B8")
 
     # Hoodie with shading and drawstrings.
     draw.polygon([(70, 68), (91, 65), (101, 74), (98, 93), (68, 93)], fill=COLORS["mint"])
     draw.polygon([(68, 79), (75, 75), (77, 92), (68, 93)], fill="#42B99C")
+    draw.polygon([(75, 69), (88, 66), (92, 70), (78, 75)], fill=COLORS["hoodie_light"])
+    draw.line((78, 88, 94, 88), fill="#34A98E")
+    draw.line((78, 88, 75, 91), fill="#34A98E")
+    draw.line((94, 88, 97, 91), fill="#34A98E")
     draw.line((86, 68, 85, 78), fill=COLORS["white"], width=1)
     draw.line((91, 68, 92, 78), fill=COLORS["white"], width=1)
     draw.point((85, 79), fill=COLORS["navy"])
@@ -239,12 +274,15 @@ def draw_character(draw: ImageDraw.ImageDraw, frame: int, stage: str) -> None:
 
     # Head, ear, hair, and face.
     draw.rectangle((head_x, head_y, head_x + 16, head_y + 19), fill=COLORS["skin"])
+    draw.rectangle((head_x + 2, head_y + 2, head_x + 5, head_y + 16), fill=COLORS["skin_light"])
+    draw.rectangle((head_x + 14, head_y + 7, head_x + 16, head_y + 18), fill=COLORS["skin_shadow"])
     draw.rectangle((head_x - 2, head_y + 7, head_x + 1, head_y + 13), fill=COLORS["skin_shadow"])
     draw.polygon(
         [(head_x - 2, head_y + 1), (head_x + 4, head_y - 4), (head_x + 18, head_y - 2), (head_x + 18, head_y + 6), (head_x + 11, head_y + 4), (head_x + 6, head_y + 7), (head_x - 2, head_y + 7)],
         fill=COLORS["navy_dark"],
     )
     draw.rectangle((head_x + 5, head_y - 3, head_x + 13, head_y - 1), fill=COLORS["navy_light"])
+    draw.point((head_x + 15, head_y + 13), fill=COLORS["skin_shadow"])
 
     if stage == "error":
         draw.rectangle((head_x + 7, head_y + 10, head_x + 9, head_y + 12), fill=COLORS["white"])

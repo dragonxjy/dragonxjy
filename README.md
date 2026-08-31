@@ -10,16 +10,15 @@
 
   <p>
     <samp>
-      Part dreamer, part builder, and a full-time collector of<br />
-      "Why does it work now?" moments.
+      👋 Hello! I'm a curious maker who enjoys giving ideas a real shape.
     </samp>
   </p>
 
   <p>
     <samp>
-      I enjoy turning half-formed ideas into small, useful things.<br />
-      I learn in public, write down what survives the debugging,<br />
-      and keep shipping even when the coffee attacks the keyboard.
+      💡 Part dreamer, part builder, and a collector of "Why does it work now?" moments.<br />
+      📝 I learn in public and write down what survives the debugging.<br />
+      🚀 I keep shipping, even when the coffee attacks the keyboard.
     </samp>
   </p>
 
@@ -44,17 +43,21 @@
 
   <img
     src="./assets/dragonxjy-coding.gif"
-    width="560"
+    width="500"
     alt="A funny pixel animation about coding, celebrating, spilling coffee, and meeting a 500 error"
   />
 
   <p>
-    ✍️ <a href="https://juejin.cn/user/1368213338982584/posts"><strong>Read my blog on Juejin</strong></a>
+    <samp>Words live on Juejin. Work lives on GitHub.</samp>
   </p>
 
-  <p>
-    <a href="https://github.com/dragonxjy?tab=repositories">Browse my projects</a>
-  </p>
+  <h3>
+    <samp>
+      ✍️ <a href="https://juejin.cn/user/1368213338982584/posts">Read my blog</a>
+      &nbsp;&nbsp;·&nbsp;&nbsp;
+      🧩 <a href="https://github.com/dragonxjy?tab=repositories">Explore my projects</a>
+    </samp>
+  </h3>
 
   <sub>Curious by default. Building on purpose.</sub>
 
