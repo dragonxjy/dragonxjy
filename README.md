@@ -46,6 +46,8 @@
     alt="A funny pixel animation about coding, celebrating, spilling coffee, and meeting a 500 error"
   />
   <br />
-  <samp>💬 Wanna chat? 👉 Feel free to leave a message on my <a href="https://juejin.cn/user/1368213338982584/posts">Blog</a></samp>
+  <h3>
+    <samp>💬 Wanna chat? 👉 Feel free to leave a message on my <a href="https://juejin.cn/user/1368213338982584/posts">Blog</a></samp>
+  </h3>
 
 </div>
