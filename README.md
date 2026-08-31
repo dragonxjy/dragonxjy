@@ -2,40 +2,43 @@
 
 <div align="center">
 
+  <img
+    src="./assets/dragonxjy-title.png"
+    width="620"
+    alt="Hey, I'm Dragon_xjy."
+  />
+
   <p>
-    <strong>Hi! I'm Dragon_xjy.</strong>
+    <samp>
+      Part dreamer, part builder, and a full-time collector of<br />
+      "Why does it work now?" moments.
+    </samp>
   </p>
 
   <p>
-    I build with <code>Python</code>, <code>AI</code> and the <code>Web</code>.<br />
-    我喜欢把学习沉淀为笔记，把想法实现成真正能运行的作品 ✨
+    <samp>
+      I enjoy turning half-formed ideas into small, useful things.<br />
+      I learn in public, write down what survives the debugging,<br />
+      and keep shipping even when the coffee attacks the keyboard.
+    </samp>
   </p>
 
   <img
     src="./assets/dragonxjy-coding.gif"
-    width="520"
-    alt="Pixel animation of Dragon_xjy coding while riding a data wave"
+    width="560"
+    alt="A funny pixel animation about coding, celebrating, spilling coffee, and meeting a 500 error"
   />
 
   <p>
-    <code>FastAPI</code> · <code>LangChain</code> · <code>LangGraph</code> ·
-    <code>Vue 3</code> · <code>TypeScript</code>
+    ✍️ <a href="https://juejin.cn/user/1368213338982584/posts"><strong>Read my blog on Juejin</strong></a>
   </p>
 
   <p>
-    📚 <a href="https://github.com/dragonxjy/ai-note">AI Notes</a>
+    <a href="https://github.com/dragonxjy">GitHub</a>
     &nbsp;·&nbsp;
-    🛠️ <a href="https://github.com/dragonxjy?tab=repositories">Projects</a>
-    &nbsp;·&nbsp;
-    💬 <a href="https://github.com/dragonxjy">Find me on GitHub</a>
+    <a href="https://github.com/dragonxjy?tab=repositories">Projects</a>
   </p>
 
-  <sub>
-    Currently exploring AI agents, RAG, async APIs and better ways to build.
-  </sub>
-
-  <br /><br />
-
-  <sub>Stay curious. Keep building. Let the code speak.</sub>
+  <sub>Curious by default. Building on purpose.</sub>
 
 </div>
